@@ -24,19 +24,24 @@ sap.ui.require([
 
 		// Assign the model object to the SAPUI5 core
         sap.ui.getCore().setModel(oModel);
-        
-        // Create a resource bundle for language specific texts
-		var oResourceModel = new ResourceModel({
+
+        var oResourceBundle = new ResourceModel({
 			bundleName: "sap.ui.demo.db.i18n.i18n"
 		});
 
-		// Assign the model object to the SAPUI5 core using the name "i18n"
-		sap.ui.getCore().setModel(oResourceModel, "i18n");
-
-		// Display the XML view called "App"
-		new XMLView({
+		sap.ui.getCore().setModel(oResourceBundle, "i18n");
+        
+        // Display the XML view called "App"
+		var oView = new XMLView({
 			viewName: "sap.ui.demo.db.view.App"
 		}).placeAt("content");
+
+		// Register the view with the message manager
+		sap.ui.getCore().getMessageManager().registerObject(oView, true);
+
+
+		// Insert the view into the DOM
+		oView.placeAt("content");
 
 	});
 });
